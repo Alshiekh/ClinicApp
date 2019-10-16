@@ -1,0 +1,60 @@
+﻿@model  ClinicApp.ViewModels.ClinicViewModel
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã—</button>
+            @*<h4 class="modal-title">Delete Department</h4>*@
+            <h3>Are you sure you want to delete Clinic ?</h3>
+        </div>
+        <div class="modal-body">
+            <div class="from-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>English Name</label>
+                        <div class="from-group">
+                            <input type="text" value="@Model.EnglishName" readonly="readonly" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Arabic Name</label>
+                        <div class="from-group">
+                            <input type="text" value="@Model.ArabicName" readonly="readonly" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Department</label>
+                        <input type="text" value="@Model.DepartmentName" readonly="readonly" class="form-control">
+                    </div><br />
+                    <div class="col-md-6">
+                        <label>Status</label>
+                        @Html.CheckBoxFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <Label>Title</Label>
+                        <input type="text" value="@Model.Title" readonly="readonly" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <Label>PhoneNumber</Label>
+                        <input type="text" value="@Model.PhoneNumber" readonly="readonly" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            @using (Ajax.BeginForm("Delete", "Clinics", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "DeleteDepartmentSuccess" }, new { @class = "form-horizontal", role = "form" }))
+            {
+                <div class="form-actions no-color">
+                    @Html.HiddenFor(x => x.Id)
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    @Html.ActionLink("Close", "Index", null, new { data_dismiss = "modal", @class = "btn btn-default btn-md" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
